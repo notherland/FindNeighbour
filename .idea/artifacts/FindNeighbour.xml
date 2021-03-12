@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="FindNeighbour">
+    <output-path>$PROJECT_DIR$/out/artifacts/FindNeighbour</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="FindNeighbour/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="FindNeighbour" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
