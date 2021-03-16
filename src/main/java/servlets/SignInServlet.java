@@ -5,7 +5,6 @@ import model.Model;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,12 +15,14 @@ import java.sql.SQLException;
 public class SignInServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req);
+        System.out.println("SUGNIN GET");
         req.getRequestDispatcher("views/SignIn.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("SIGNIN POST");
+        req.setCharacterEncoding("UTF-8");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         Model model = Model.getInstance();
@@ -43,6 +44,6 @@ public class SignInServlet extends HttpServlet {
             req.getRequestDispatcher("views/HomePage.jsp").forward(req, resp);
         }
     else
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/SignIn.jsp").forward(req, resp);
     }
 }

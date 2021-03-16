@@ -7,11 +7,20 @@ public class User {
     private int person_id;
     private int sex;
     private String login;
-    private String password;
+    private Password password;
     private String name;
     private String surname;
     private String ph_number;
     private int test_id;
+
+    public User(){
+        this.password = new Password();
+    }
+
+    public User(String login, String password){
+        this.login = login;
+        this.password = new Password(password, login);;
+    }
 
     public int getPerson_id(){
         return this.person_id;
@@ -37,12 +46,12 @@ public class User {
         this.login = login;
     }
 
-    public String getPassword() {
+    public Password getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String PassHash){
+        this.password.setPassHash(PassHash);
     }
 
     public String getName() {
@@ -77,5 +86,15 @@ public class User {
         return test_id;
     }
 
-    public String getUserContact(){ return name + " " + surname + " " + ph_number; }
+    public String getUserContact(){
+        String UserContact = new String();
+        if (name != null)
+            UserContact += name;
+        if (surname != null)
+            UserContact += " " + surname;
+        if (ph_number != null)
+            UserContact += " " + ph_number;
+
+        return UserContact;
+    }
 }

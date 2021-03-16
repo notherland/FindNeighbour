@@ -4,15 +4,10 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <servlet>
-        <servlet-name>signup</servlet-name>
-        <servlet-class>servlets.SignUpServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>signup</servlet-name>
-        <url-pattern>/signup</url-pattern>
-    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>signin</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 
     <servlet>
         <servlet-name>signin</servlet-name>
@@ -22,6 +17,17 @@
     <servlet-mapping>
         <servlet-name>signin</servlet-name>
         <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>signup</servlet-name>
+        <servlet-class>servlets.SignUpServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>signup</servlet-name>
+        <url-pattern>/signup</url-pattern>
     </servlet-mapping>
 
     <servlet>

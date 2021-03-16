@@ -6,7 +6,6 @@ import model.Model;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,24 +15,26 @@ import java.sql.SQLException;
 
 public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/Test.jsp");
-        requestDispatcher.forward(req, resp);
+        System.out.println("TEST GET");
+        req.getRequestDispatcher("/views/Test.jsp").forward(req, resp);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("TEST POST");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         Model model = Model.getInstance();
-        try {
-            if (user == null) {
+
+        if (user == null) {//If could'not get user from session trying to get login and password
+            System.out.println("????");
+            try {
                 String login = req.getParameter("login");
                 String password = req.getParameter("password");
                 user = model.SignIn(login, password);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
         if (user != null) {
@@ -49,13 +50,18 @@ public class TestServlet extends HttpServlet {
             test.setAnswers(Answers);
 
             try {
-                model.saveTest(test, user);
+                if (model.saveTest(test, user))
+                    req.getRequestDispatcher("/signin").forward(req, resp);
+                else{
+                    req.getRequestDispatcher("/views/Test.jsp").forward(req, resp);
+                }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+                req.getRequestDispatcher("/PageNotFound.jsp").forward(req, resp);
             }
-        }
+        } else {//If counld not initialize user then authenticate him again
+            req.getRequestDispatcher("/signin").forward(req, resp);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
-        requestDispatcher.forward(req, resp);
+        }
     }
 }

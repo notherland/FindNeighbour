@@ -19,49 +19,50 @@ import java.util.List;
 public class MatchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         Model model = Model.getInstance();
-        try {
-            if (user == null) {
+
+        if (user == null) {//If couldnt get user from session initialize him again
+            try {
                 String login = req.getParameter("login");
                 String password = req.getParameter("password");
-                System.out.println(login + " " + password);
+
                 user = model.SignIn(login, password);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
         if (user != null) {
-            System.out.println("matched");
+            List<User> Matches = null;
             try {
-                List<User> Matches = model.findMatches(user);
-                System.out.println(Matches.size());
+                Matches = model.findMatches(user);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            if (Matches != null) {
                 List<String> usersContacts = new ArrayList<String>();
                 Iterator<User> iter = Matches.iterator();
+
                 while (iter.hasNext()) {
-                    //System.out.println(iter.next().getUserContact());
                     usersContacts.add(iter.next().getUserContact());
                 }
                 session.setAttribute("usersContacts", usersContacts);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
 
-            }
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/Match.jsp");
-            requestDispatcher.forward(req, resp);
+                req.getRequestDispatcher("/views/Match.jsp").forward(req, resp);
+            } else
+                req.getRequestDispatcher("/test").forward(req, resp);
         } else {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
-            requestDispatcher.forward(req, resp);
+            req.getRequestDispatcher("/signin").forward(req, resp);
         }
-
     }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/signin");
         requestDispatcher.forward(req, resp);
 
     }

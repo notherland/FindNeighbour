@@ -4,7 +4,6 @@ import entities.User;
 import model.Model;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,32 +19,33 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User();
+        req.setCharacterEncoding("UTF-8");
+        User user = new User(req.getParameter("login"), req.getParameter("password"));
         user.setSex(Integer.parseInt(req.getParameter("sex")));
-        user.setLogin(req.getParameter("login"));
-        user.setPassword(req.getParameter("password"));
         user.setName(req.getParameter("name"));
         user.setSurname(req.getParameter("surname"));
         user.setPh_number(req.getParameter("ph_number"));
         user.setTest_id(0);
 
         Model model = Model.getInstance();
+
         try {
-             model.SignUp(user);
+            if (model.SignUp(user)) { // Checking if user already exists
+                HttpSession session = req.getSession();
+                session.setAttribute("login", user.getLogin());
+                session.setAttribute("name", user.getName());
+                session.setAttribute("surname", user.getSurname());
+
+
+                req.getRequestDispatcher("/signin").forward(req, resp);
+            } else {
+                req.getRequestDispatcher("views/SignUp.jsp").forward(req, resp);
+            }
         } catch (SQLException throwables) {
+
             throwables.printStackTrace();
+            req.getRequestDispatcher("/views/PageNotFound.jsp").forward(req, resp);
         }
 
-        if (user != null) {
-            HttpSession session = req.getSession();
-            session.setAttribute("login", user.getLogin());
-            session.setAttribute("name", user.getName());
-            session.setAttribute("surname", user.getSurname());
-
-
-            req.getRequestDispatcher("views/HomePage.jsp").forward(req, resp);
-        }
-        else
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }

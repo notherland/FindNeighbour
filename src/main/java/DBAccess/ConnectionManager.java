@@ -14,8 +14,7 @@ public class ConnectionManager {
             return DriverManager.getConnection(url, username, password);
         }
         catch(Exception ex){
-            System.out.println(ex);
-            System.out.println("Failed");
+            ex.printStackTrace();
         }
         return null;
     }
