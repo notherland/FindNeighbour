@@ -179,6 +179,7 @@ public class UsersInteraction {
         int[] Answers = {ans1, ans2, ans3, ans4, ans5, ans6, ans7};
 
         test.setAnswers(Answers);
+        System.out.println(resultSet.getInt("user_id"));
         test.setUser_id(resultSet.getInt("user_id"));
 
         return test;

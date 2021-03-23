@@ -6,7 +6,7 @@
         <%@include file='style.css' %>
     </style>
     <title>FindNeighbour — SignUp</title>
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/png">
 </head>
 
 <body>

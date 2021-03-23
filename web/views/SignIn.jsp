@@ -6,7 +6,8 @@
     </style>
 
     <title>FindNeighbour — Login</title>
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
+
+    <link rel="icon" href="http://192.168.1.105:8080/views/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -15,7 +16,7 @@
 <main class="block small_page">
     <div class="content main__content">
 
-        <h1>Find perfect neibghbour</h1>
+        <h1>Find perfect neighbour</h1>
         <hr class="fat_line">
         <div class="reg_form">
             <h2> Log into your account:</h2>
