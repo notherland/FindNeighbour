@@ -5,6 +5,7 @@ import entities.User;
 import model.Model;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,13 @@ import java.sql.SQLException;
 public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("TEST GET");
-        req.getRequestDispatcher("/views/Test.jsp").forward(req, resp);
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+
+        if (user != null)
+            req.getRequestDispatcher("views/Test.jsp").forward(req, resp);
+        else
+            resp.sendRedirect(req.getContextPath() + "/signin");
     }
 
     @Override
@@ -51,16 +58,16 @@ public class TestServlet extends HttpServlet {
 
             try {
                 if (model.saveTest(test, user))
-                    req.getRequestDispatcher("/signin").forward(req, resp);
-                else{
-                    req.getRequestDispatcher("/views/Test.jsp").forward(req, resp);
+                    resp.sendRedirect(req.getContextPath() + "/signin");
+                else {
+                    resp.sendRedirect(req.getContextPath() + "/test");
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
                 req.getRequestDispatcher("/PageNotFound.jsp").forward(req, resp);
             }
         } else {//If counld not initialize user then authenticate him again
-            req.getRequestDispatcher("/signin").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/signin");
 
         }
     }

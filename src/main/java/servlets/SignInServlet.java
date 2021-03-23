@@ -16,7 +16,14 @@ public class SignInServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("SUGNIN GET");
-        req.getRequestDispatcher("views/SignIn.jsp").forward(req, resp);
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
+
+        if (user != null)
+            req.getRequestDispatcher("views/HomePage.jsp").forward(req, resp);
+        else
+            req.getRequestDispatcher("views/SignIn.jsp").forward(req, resp);
+
     }
 
     @Override
@@ -38,12 +45,8 @@ public class SignInServlet extends HttpServlet {
             session.setAttribute("login", user.getLogin());
             session.setAttribute("name", user.getName());
             session.setAttribute("surname", user.getSurname());
-            session.setAttribute("user",  user);
-
-
-            req.getRequestDispatcher("views/HomePage.jsp").forward(req, resp);
+            session.setAttribute("user", user);
         }
-    else
-        req.getRequestDispatcher("/views/SignIn.jsp").forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/signin");
+        }
     }
-}

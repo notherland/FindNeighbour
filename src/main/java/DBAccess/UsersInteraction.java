@@ -104,10 +104,10 @@ public class UsersInteraction {
         Connection conn = cm.getConnection();
         PreparedStatement ps = null;
         Test test = null;
-        List<User> Matches = new ArrayList<User>();
+        List<User> Matches = null;
 
-        //Get main users test
         if (conn != null) {
+            //Get main users test
             try {
                 ps = conn.prepareStatement("SELECT * FROM USERS.TEST WHERE USER_ID = ?");
                 ps.setInt(1, user.getPerson_id());
@@ -118,47 +118,50 @@ public class UsersInteraction {
                 throwables.printStackTrace();
             }
             //iterate on other user's tests list, choose best matches
-            try {
-                ps = conn.prepareStatement("SELECT * FROM USERS.TEST WHERE USER_ID != ?");
-                ps.setInt(1, user.getPerson_id());
-                ResultSet resultSet = ps.executeQuery();//Select tests
-                int BestCount = 0;
-                int count = -1;
+            if (test != null) {
+                Matches = new ArrayList<User>();
+                try {
+                    ps = conn.prepareStatement("SELECT * FROM USERS.TEST WHERE USER_ID != ?");
+                    ps.setInt(1, user.getPerson_id());
+                    ResultSet resultSet = ps.executeQuery();//Select tests
+                    int BestCount = 0;
+                    int count = -1;
 
-                while (resultSet.next()) {
-                    //find user by foreign key
-                    int user_id = resultSet.getInt(("USER_ID"));
+                    while (resultSet.next()) {
+                        //find user by foreign key
+                        int user_id = resultSet.getInt(("USER_ID"));
 
-                    PreparedStatement Userps = conn.prepareStatement("SELECT * FROM USERS.PERSON WHERE PERSON_ID = ? AND SEX = ?");
-                    Userps.setInt(1, user_id);
-                    Userps.setInt(2, user.getSex());
-                    ResultSet UserResultSet = Userps.executeQuery();//Select user with test
+                        PreparedStatement Userps = conn.prepareStatement("SELECT * FROM USERS.PERSON WHERE PERSON_ID = ? AND SEX = ?");
+                        Userps.setInt(1, user_id);
+                        Userps.setInt(2, user.getSex());
+                        ResultSet UserResultSet = Userps.executeQuery();//Select user with test
 
-                    if (UserResultSet.next()) {
-                        User MatchUser = createNewUser(UserResultSet);
-                        Test NewTest = createNewTest(resultSet);
-                        count = test.countMatches(NewTest);
+                        if (UserResultSet.next()) {
+                            User MatchUser = createNewUser(UserResultSet);
+                            Test NewTest = createNewTest(resultSet);
+                            count = test.countMatches(NewTest);
 
-                        if (count == BestCount)
-                            Matches.add(MatchUser);
+                            if (count == BestCount)
+                                Matches.add(MatchUser);
 
-                        if (count > BestCount) {
-                            Matches.clear();
-                            Matches.add(MatchUser);
-                            System.out.println("Add" + MatchUser.getLogin());
-                            BestCount = count;
+                            if (count > BestCount) {
+                                Matches.clear();
+                                Matches.add(MatchUser);
+                                System.out.println("Add" + MatchUser.getLogin());
+                                BestCount = count;
+                            }
                         }
                     }
-                }
-                return Matches;
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+                    return Matches;
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
 
-            } finally {
-                if (ps != null)
-                    ps.close();
-                if (conn != null)
-                    conn.close();
+                } finally {
+                    if (ps != null)
+                        ps.close();
+                    if (conn != null)
+                        conn.close();
+                }
             }
         }
         return Matches;

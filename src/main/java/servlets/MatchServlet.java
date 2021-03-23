@@ -53,17 +53,15 @@ public class MatchServlet extends HttpServlet {
 
                 req.getRequestDispatcher("/views/Match.jsp").forward(req, resp);
             } else
-                req.getRequestDispatcher("/test").forward(req, resp);
+                resp.sendRedirect(req.getContextPath() + "/test");
         } else {
-            req.getRequestDispatcher("/signin").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/signin");
         }
     }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/signin");
-        requestDispatcher.forward(req, resp);
-
+        resp.sendRedirect(req.getContextPath() + "/signin");
     }
 }

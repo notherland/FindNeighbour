@@ -22,7 +22,12 @@ public class Test {
 
         int[] Answers = test.getAnswers();
 
-        for (int i = 0; i < Q_COUNT; i++){
+        if (Answers[0] == this.Answers[1])
+            count++;
+        if (Answers[1] == this.Answers[0])
+            count++;
+
+        for (int i = 2; i < Q_COUNT; i++){
             if (Answers[i] == this.Answers[i])
                 count++;
         }

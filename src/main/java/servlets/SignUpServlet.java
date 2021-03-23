@@ -14,6 +14,7 @@ import java.sql.SQLException;
 public class SignUpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("SUGNUP GET");
         req.getRequestDispatcher("views/SignUp.jsp").forward(req, resp);
     }
 
@@ -37,7 +38,7 @@ public class SignUpServlet extends HttpServlet {
                 session.setAttribute("surname", user.getSurname());
 
 
-                req.getRequestDispatcher("/signin").forward(req, resp);
+                resp.sendRedirect(req.getContextPath() + "/signin");
             } else {
                 req.getRequestDispatcher("views/SignUp.jsp").forward(req, resp);
             }

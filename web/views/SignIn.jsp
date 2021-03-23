@@ -1,61 +1,45 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <style>
+        <%@include file='style.css' %>
+    </style>
+
     <title>FindNeighbour — Login</title>
-    <link rel="shortcut icon" href="favicon.png" type="image/png">    <!-- Здесь есть сыылка, которую нужно переделать, солнце-->                <!-- наверное-->
-    <link rel="stylesheet" href="/views/style.css">       <!-- Здесь есть сыылка, которую нужно переделать, солнце-->                 <!-- наверное-->
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
 </head>
 
 <body>
-<header class="block page-header">
+<jsp:include page="header.jsp"/>
 
-    <div class="content">
+<main class="block small_page">
+    <div class="content main__content">
 
-        <a href="/views/HomePage.jsp" class="logo">fn</a>      <!-- Здесь есть сыылка, которую нужно переделать, солнце-->
+        <h1>Find perfect neibghbour</h1>
+        <hr class="fat_line">
+        <div class="reg_form">
+            <h2> Log into your account:</h2>
+            <form method="post">
 
-        <ul class="main-menu">
-            <li class="main-menu__item">
-                <a href="/match" class="main-menu__link">                <!-- Здесь есть сыылка, которую нужно переделать, солнце-->
-                    Match
-                </a>
-            </li>
-            <li class="main-menu__item">
-                <a href="/test" class="main-menu__link">              <!-- Здесь есть сыылка, которую нужно переделать, солнце-->
-                    Test
-                </a>
-            </li>
-            <li class="main-menu__item">
-                <a href="/signin" class="main-menu__link active">                <!-- Здесь есть сыылка, которую нужно переделать, солнце-->
-                    SignIn
-                </a>
-            </li>
-        </ul>
+                <input type="text" name="login" placeholder="Login" class="common_input"><br/>
+
+                <input type="password" name="password" placeholder="Password" class="common_input"><br/>
+
+                <button href="/signin" class="big_button green_button signin">Sign in</button>
+
+            </form>
+            <hr class="list_line">
+            <h2>Or create new account:</h2>
+
+            <a href="/signup" class="big_button purple_button signup">Sign up</a>
+        </div>
 
     </div>
 
-</header>
+</main>
 
-<!--♥♥♥♥кусок выше этого коммента одинаковый на всех страницах, с точностью до того, какой из пунктов мэйн меню щас активен -->
-<!-- (класс  "main-menu__link active" то есть) и тайтла в хэде, можешь копипастить переделанные ссылки♥♥♥♥♥-->
-
-<main class = "block" >
-    <div class = "content main__content">
-
-        <h1>Найди идеального соседа</h1>
-        <hr class = "fat_line">
-        <form method="post">
-
-            <p>Логин :</p>
-            <input type="text" name="login"><br/>
-
-            <p>Пароль:</p>
-            <input type="password" name="password"><br/>
-
-            <button href="/signin" class="button_link login-link">Войти</button>      <!-- Здесь есть сыылка, которую нужно переделать, солнце-->
-        </form>
-        <p> Еще нет аккаунта?</p>
-        <a href="/signup" class="button_link signup-link">Зарегистрироваться</a>       <!-- Здесь есть сыылка, которую нужно переделать, солнце-->
-    </div>
+<jsp:include page="footer.jsp"/>
 
 </body>
+
 </html>
