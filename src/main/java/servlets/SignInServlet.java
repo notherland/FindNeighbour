@@ -15,7 +15,6 @@ import java.sql.SQLException;
 public class SignInServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("SUGNIN GET");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
 
@@ -28,7 +27,6 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("SIGNIN POST");
         req.setCharacterEncoding("UTF-8");
         String login = req.getParameter("login");
         String password = req.getParameter("password");

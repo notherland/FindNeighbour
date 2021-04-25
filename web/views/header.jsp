@@ -23,7 +23,7 @@
             </li>
             <li class="main-menu__item">
                 <a href="/signup" class="main-menu__link">
-                    SignUp
+                    Registration
                 </a>
             </li>
         </ul>

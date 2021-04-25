@@ -16,7 +16,6 @@ import java.sql.SQLException;
 
 public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("TEST GET");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
 
@@ -28,13 +27,11 @@ public class TestServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("TEST POST");
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         Model model = Model.getInstance();
 
         if (user == null) {//If could'not get user from session trying to get login and password
-            System.out.println("????");
             try {
                 String login = req.getParameter("login");
                 String password = req.getParameter("password");

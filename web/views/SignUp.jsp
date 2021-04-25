@@ -25,7 +25,7 @@
 
                     <input type="text" name="login" placeholder="Login" class="common_input login">
 
-                    <input type="text" name="password" placeholder="Password" class="common_input password">
+                    <input type="password" name="password" placeholder="Password" class="common_input"><br/>
 
                 </div>
 
@@ -41,15 +41,15 @@
 
                 <div class="cl question_block">
                     <ul class="horiz1">
-                        <p class="horiz_par horiz1"> Пол: </p>
+                        <p class="horiz_par horiz1"> Sex: </p>
                         <li class="horiz1">
                             <input id="w" type="radio" name="sex" value="1" class="rad1">
-                            <label class="question-label tight-label" for="w"> Женский </label>
+                            <label class="question-label tight-label" for="w"> Female </label>
                         </li>
 
                         <li class="horiz1">
                             <input id="m" type="radio" name="sex" value="2" class="rad2">
-                            <label class="question-label tight-label" for="m"> Мужской</label>
+                            <label class="question-label tight-label" for="m"> Male</label>
                         </li>
                     </ul>
                 </div>

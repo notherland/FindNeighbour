@@ -14,17 +14,14 @@ public class UsersInteraction {
         Connection conn = cm.getConnection();
         PreparedStatement ps = null;
         User user = null;
-        System.out.println(login);
         try {
             ps = conn.prepareStatement("SELECT * FROM USERS.PERSON where LOGIN = ?");
             ps.setString(1, login);
             ResultSet resultSet = ps.executeQuery();//returns sql result
 
             if (resultSet.next()) {
-                System.out.println("!!!!");
                 user = createNewUser(resultSet);
             }
-            System.out.println(user.getLogin());
         } catch (Exception ex) {
             System.out.println(ex);
         } finally {
@@ -147,7 +144,6 @@ public class UsersInteraction {
                             if (count > BestCount) {
                                 Matches.clear();
                                 Matches.add(MatchUser);
-                                System.out.println("Add" + MatchUser.getLogin());
                                 BestCount = count;
                             }
                         }
@@ -179,14 +175,12 @@ public class UsersInteraction {
         int[] Answers = {ans1, ans2, ans3, ans4, ans5, ans6, ans7};
 
         test.setAnswers(Answers);
-        System.out.println(resultSet.getInt("user_id"));
         test.setUser_id(resultSet.getInt("user_id"));
 
         return test;
     }
 
     private User createNewUser(ResultSet resultSet) throws SQLException {
-        System.out.println("CREATENEWUSER" + " " + resultSet.getString("PASSWORD"));
         User user = new User();
         if (resultSet != null) {
             user.setLogin(resultSet.getString("LOGIN"));
@@ -197,8 +191,7 @@ public class UsersInteraction {
             user.setSurname(resultSet.getString("SURNAME"));
             user.setPh_number(resultSet.getString("PH_NUMBER"));
         }
-        System.out.println(user.getLogin());
-        System.out.println(resultSet.getString("LOGIN"));
+
         return user;
     }
 }

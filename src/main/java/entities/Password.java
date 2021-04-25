@@ -12,7 +12,6 @@ public class Password {
     public Password(){}
 
     public Password (String password, String salt){
-        System.out.println("PASSWORD" + " " + password+" "+salt);
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             md.update(salt.getBytes(StandardCharsets.UTF_8));
@@ -38,7 +37,6 @@ public class Password {
     }
 
     public boolean isEqual(Password password){
-        System.out.println(password.getPassword() +" "+ this.passHash);
         if (this.passHash.equals(password.getPassword()))
             return true;
         else return false;
