@@ -10,8 +10,7 @@ import java.util.List;
 
 public class UsersInteraction {
     public User findByLogin(String login) throws SQLException {
-        ConnectionManager cm = new ConnectionManager();
-        Connection conn = cm.getConnection();
+        Connection conn = ConnectionPool.getInstance().getConnection();
         PreparedStatement ps = null;
         User user = null;
         try {
@@ -34,8 +33,7 @@ public class UsersInteraction {
     }
 
     public boolean addNewUser(User user) throws SQLException {
-        ConnectionManager cm = new ConnectionManager();
-        Connection conn = cm.getConnection();
+        Connection conn = ConnectionPool.getInstance().getConnection();
         PreparedStatement ps = null;
 
         if (conn != null) {//Check connection
@@ -67,8 +65,7 @@ public class UsersInteraction {
     }
 
     public boolean addNewTest(Test test, User user) throws SQLException {
-        ConnectionManager cm = new ConnectionManager();
-        Connection conn = cm.getConnection();
+        Connection conn = ConnectionPool.getInstance().getConnection();
         PreparedStatement ps = null;
 
         if (conn != null) {
@@ -97,8 +94,7 @@ public class UsersInteraction {
     }
 
     public List<User> findMatches(User user) throws SQLException {
-        ConnectionManager cm = new ConnectionManager();
-        Connection conn = cm.getConnection();
+        Connection conn = ConnectionPool.getInstance().getConnection();
         PreparedStatement ps = null;
         Test test = null;
         List<User> Matches = null;

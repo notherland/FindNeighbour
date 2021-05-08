@@ -5,13 +5,13 @@
 </head>
 <body>
 <div>
-  <h1>Найди идеального соседа</h1>
+  <h1>Find perfect neighbour</h1>
 </div>
 
 <div>
   <div>
-    <button onclick="location.href='/signin'">Войти</button>
-    <button onclick="location.href='/signup'">Зарегстрироваться</button>
+    <button onclick="location.href='/signin'">Signin</button>
+    <button onclick="location.href='/signup'">Registration</button>
   </div>
 </div>
 </body>
