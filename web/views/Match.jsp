@@ -16,7 +16,7 @@
     <div class="content main__content">
 
         <%
-            List<String> UsersContacts = (List<String>) session.getAttribute("usersContacts");
+            List<String> UsersContacts = (List<String>) request.getAttribute("usersContacts");
 
             if (UsersContacts != null && !UsersContacts.isEmpty()) {
                 Iterator<String> iter = UsersContacts.iterator();

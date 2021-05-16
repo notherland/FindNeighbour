@@ -2,7 +2,6 @@ package servlets;
 
 import entities.User;
 import model.Model;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,12 +10,32 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
+
+/**
+ * Class MatchServlet is responsible for interaction between user and model, when user wants to sign up
+ * Can serve GET and POST requests
+ */
 public class SignUpServlet extends HttpServlet {
+
+    /**
+     * Serves GET requests
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("views/SignUp.jsp").forward(req, resp);
     }
 
+    /**
+     * Serves POST requests
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");

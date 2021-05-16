@@ -12,7 +12,18 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Class SignInServlet is responsible for interaction between user and model, when user wants to sign in
+ * Can serve GET and POST requests
+ */
 public class SignInServlet extends HttpServlet {
+    /**
+     * Serves GET requests
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -25,6 +36,13 @@ public class SignInServlet extends HttpServlet {
 
     }
 
+    /**
+     * Serves POST requests
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -46,5 +64,5 @@ public class SignInServlet extends HttpServlet {
             session.setAttribute("user", user);
         }
         resp.sendRedirect(req.getContextPath() + "/signin");
-        }
     }
+}

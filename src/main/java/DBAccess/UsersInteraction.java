@@ -8,7 +8,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class Users interaction is responsible for interaction with Users database
+ */
 public class UsersInteraction {
+    /**
+     * Check if there is certain user in database
+     * @param login
+     * @return User if he had been signed up before else null
+     * @throws SQLException
+     */
     public User findByLogin(String login) throws SQLException {
         Connection conn = ConnectionPool.getInstance().getConnection();
         PreparedStatement ps = null;
@@ -32,6 +41,12 @@ public class UsersInteraction {
         return user;
     }
 
+    /**
+     * Adda new user to database
+     * @param user
+     * @return true if adding was successful else false
+     * @throws SQLException
+     */
     public boolean addNewUser(User user) throws SQLException {
         Connection conn = ConnectionPool.getInstance().getConnection();
         PreparedStatement ps = null;
@@ -64,6 +79,13 @@ public class UsersInteraction {
         return false;
     }
 
+    /**
+     * Add new test results for certain user in database
+     * @param test
+     * @param user
+     * @return true if adding was successful else false
+     * @throws SQLException
+     */
     public boolean addNewTest(Test test, User user) throws SQLException {
         Connection conn = ConnectionPool.getInstance().getConnection();
         PreparedStatement ps = null;
@@ -93,6 +115,12 @@ public class UsersInteraction {
         return false;
     }
 
+    /**
+     * Find best matches chosen by test results
+     * @param user
+     * @return list uf best matches
+     * @throws SQLException
+     */
     public List<User> findMatches(User user) throws SQLException {
         Connection conn = ConnectionPool.getInstance().getConnection();
         PreparedStatement ps = null;
@@ -159,6 +187,12 @@ public class UsersInteraction {
         return Matches;
     }
 
+    /**
+     * Creates Test entity by resultset
+     * @param resultSet
+     * @return Test entity
+     * @throws SQLException
+     */
     private Test createNewTest(ResultSet resultSet) throws SQLException {
         Test test = new Test();
         int ans1 = resultSet.getInt("ans1");
@@ -176,6 +210,12 @@ public class UsersInteraction {
         return test;
     }
 
+    /**
+     * Creates User entity by resultset
+     * @param resultSet
+     * @return User entity
+     * @throws SQLException
+     */
     private User createNewUser(ResultSet resultSet) throws SQLException {
         User user = new User();
         if (resultSet != null) {

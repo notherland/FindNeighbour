@@ -14,7 +14,18 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Class MatchServlet is responsible for interaction between user and model, when user wants to add answers for test
+ * Can serve GET and POST requests
+ */
 public class TestServlet extends HttpServlet {
+    /**
+     * Serves GET requests
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
@@ -25,6 +36,13 @@ public class TestServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/signin");
     }
 
+    /**
+     * Serves POST requests
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();

@@ -16,7 +16,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Class MatchServlet is responsible for interaction between user and model, when user wants to see matches
+ * Can serve GET and POST requests
+ */
 public class MatchServlet extends HttpServlet {
+    /**
+     * Serves GET requests
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -49,7 +60,7 @@ public class MatchServlet extends HttpServlet {
                 while (iter.hasNext()) {
                     usersContacts.add(iter.next().getUserContact());
                 }
-                session.setAttribute("usersContacts", usersContacts);
+                req.setAttribute("usersContacts", usersContacts);
 
                 req.getRequestDispatcher("/views/Match.jsp").forward(req, resp);
             } else
@@ -60,6 +71,13 @@ public class MatchServlet extends HttpServlet {
     }
 
 
+    /**
+     * Serves POST requests
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.sendRedirect(req.getContextPath() + "/signin");
