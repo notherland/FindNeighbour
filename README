@@ -1,0 +1,27 @@
+                  Find neighbour
+
+It is an application for searching best roommate based on test results
+
+                  Installation and deploying
+
+Required
+API: Tomcat 7.0, maven;
+Libs: mysql-connector-java-8.0.23.jar (with cj)
+
+Installation
+
+First of all, download and initialize tomcat
+You should tune tomcat7 maven's plugin for tomcat in pom.xml : change username and password in pom.xml on yours username and password for tomcat
+After that use command mvn compile, for maven to create target and download libraries
+Run tomcat
+To deploy application use command mvn tomcat7:deploy
+
+For connecting database:
+
+Use mysql server
+Create your database, using DBScript
+You can tune connection in MySql profile and in context.xml to use your username, password and database name
+
+
+
+
