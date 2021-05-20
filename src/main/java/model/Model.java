@@ -6,6 +6,7 @@ import entities.Password;
 import entities.Test;
 import entities.User;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class Model {//Create as Singleton
      * @return User object if he was found in database
      * @throws SQLException
      */
-    public User SignIn(String login, String password) throws SQLException {
+    public User SignIn(String login, String password) throws SQLException, NoSuchAlgorithmException {
         UsersInteraction ui = new UsersInteraction();
         User user = ui.findByLogin(login);
 

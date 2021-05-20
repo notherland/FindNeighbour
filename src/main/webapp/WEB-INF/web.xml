@@ -10,10 +10,6 @@
     </welcome-file-list>
 
     <error-page>
-        <location>/views/Error.html</location>
-    </error-page>
-
-    <error-page>
         <!-- Missing login -->
         <error-code>401</error-code>
         <location>/views/Error401.html</location>

@@ -9,22 +9,6 @@
     <groupId>Application</groupId>
     <artifactId>Application</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <profiles>
-        <profile>
-            <id>MySQL</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <db.script>DBScript</db.script>
-                <jpa.database>MYSQL</jpa.database>
-                <jdbc.driverClassName>com.mysql.cj.jdbc.Driver</jdbc.driverClassName>
-                <jdbc.url>jdbc:mysql://localhost:3306/users?useUnicode=true</jdbc.url>
-                <jdbc.username>root</jdbc.username>
-                <jdbc.password>xen930013</jdbc.password>
-            </properties>
-        </profile>
-    </profiles>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>

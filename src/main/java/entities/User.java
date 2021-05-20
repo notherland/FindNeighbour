@@ -1,5 +1,7 @@
 package entities;
 
+import java.security.NoSuchAlgorithmException;
+
 /**
  * User class represents user
  */
@@ -59,7 +61,7 @@ public class User {
      * @param login
      * @param password
      */
-    public User(String login, String password){
+    public User(String login, String password) throws NoSuchAlgorithmException {
         this.login = login;
         this.password = new Password(password, login);;
     }

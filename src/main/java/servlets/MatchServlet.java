@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,7 +42,7 @@ public class MatchServlet extends HttpServlet {
                 String password = req.getParameter("password");
 
                 user = model.SignIn(login, password);
-            } catch (SQLException throwables) {
+            } catch (SQLException | NoSuchAlgorithmException throwables) {
                 throwables.printStackTrace();
             }
         }
