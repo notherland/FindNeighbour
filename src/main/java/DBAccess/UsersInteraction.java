@@ -31,7 +31,7 @@ public class UsersInteraction {
                 user = createNewUser(resultSet);
             }
         } catch (Exception ex) {
-            System.out.println(ex);
+
         } finally {
             if (ps != null)
                 ps.close();
@@ -108,8 +108,6 @@ public class UsersInteraction {
             } finally {
                 if (ps != null)
                     ps.close();
-                if (conn != null)
-                    conn.close();
             }
         }
         return false;

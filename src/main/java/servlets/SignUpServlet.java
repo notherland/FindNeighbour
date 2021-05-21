@@ -46,6 +46,7 @@ public class SignUpServlet extends HttpServlet {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+        assert user != null;
         user.setSex(Integer.parseInt(req.getParameter("sex")));
         user.setName(req.getParameter("name"));
         user.setSurname(req.getParameter("surname"));
